@@ -1,6 +1,13 @@
+import env from "./config/env";
 import app from "./lib/app";
+import bootstrap from "./lib/bootstrap";
+import { logger } from "./utils/logger";
 
-export default {
+await bootstrap();
+
+Bun.serve({
   fetch: app.fetch,
-  port: 3000,
-};
+  port: env?.PORT,
+});
+
+logger.info(`Server is running on http://localhost:8080/api/v1`);

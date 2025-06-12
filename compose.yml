@@ -14,5 +14,27 @@ services:
     networks:
       - backend
 
+  redis:
+    image: redis
+    container_name: binspire-redis
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${REDIS_PORT}:6379"
+    networks:
+      - backend
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${REDIS_INSIGHT_PORT}:5540"
+    networks:
+      - backend
+
 networks:
   backend:
